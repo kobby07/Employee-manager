@@ -1,0 +1,30 @@
+{% extends 'base/layout.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Create Employee{% endblock title %}
+
+{% block pagetitle %}
+Create Employee
+{% endblock pagetitle %}
+
+
+{% block active1 %}active{% endblock active1 %}
+
+
+{% block content %}
+
+<div class="am-mainpanel">
+    <div class="am-pagebody">
+        <div class="card p-5 shadow">
+           <form method="POST" action="{% url 'create' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form|crispy }}
+            <button type="submit" class="btn btn-block mt-3" style="background-color: #2d3a50; color: white; width: 140px; margin-left: auto;">Create</button>
+
+           </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

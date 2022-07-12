@@ -1,0 +1,99 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Twitter -->
+    <meta name="twitter:site" content="@themepixels">
+    <meta name="twitter:creator" content="@themepixels">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Amanda">
+    <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
+    <meta name="twitter:image" content="http://themepixels.me/amanda/img/amanda-social.png">
+
+    <!-- Facebook -->
+    <meta property="og:url" content="http://themepixels.me/amanda">
+    <meta property="og:title" content="Bracket">
+    <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
+
+    <meta property="og:image" content="http://themepixels.me/amanda/img/amanda-social.png">
+    <meta property="og:image:secure_url" content="http://themepixels.me/amanda/img/amanda-social.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+
+    <!-- Meta -->
+    <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
+    <meta name="author" content="ThemePixels">
+
+
+    <title>Log In</title>
+
+    <link href="{% static 'lib/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/Ionicons/css/ionicons.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/perfect-scrollbar/css/perfect-scrollbar.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/amanda.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+  </head>
+
+  <body>
+    {% for message in messages %}
+    <div class="container-fluid p-0" style="text-align: center;">
+      <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="True">&times;</span>
+        </button>
+        {{ message }}
+      </div>
+    </div>
+    {% endfor %}
+
+    <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+      <div class="am-signin-wrapper">
+        <div class="am-signin-box">
+          <div class="row no-gutters">
+            <div class="col-lg-5">
+              <div>
+                <img src="{% static 'logo.png' %}"  height='100'>
+                <p>Log in to manage your employee records</p>
+
+                <hr>
+                <p>Don't have an account? <br> <a href="{% url 'signup' %}">Sign up Now</a></p>
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <h5 class="tx-gray-800 mg-b-25">Sign In To Your Account</h5>
+
+              <div class="form-group">
+                <label class="form-control-label">Username:</label>
+                <input type="text" name="username" class="form-control" placeholder="Enter your username">
+              </div><!-- form-group -->
+
+              <div class="form-group">
+                <label class="form-control-label">Password:</label>
+                <input type="password" name="password" class="form-control" placeholder="Enter your password">
+              </div><!-- form-group -->
+
+
+              <button type="submit" class="btn btn-block">Sign In</button>
+            </div><!-- col-7 -->
+          </div><!-- row -->
+        </div><!-- signin-box -->
+      </div><!-- am-signin-wrapper -->
+    </form>
+
+
+    <script src="{% static 'lib/jquery/jquery.js' %}"></script>
+    <script src="{% static 'lib/popper.js/popper.js' %}"></script>
+    <script src="{% static 'lib/bootstrap/bootstrap.js' %}"></script>
+    <script src="{% static 'lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js' %}"></script>
+
+    <script src="{% static 'js/amanda.js' %}"></script>
+  </body>
+</html>

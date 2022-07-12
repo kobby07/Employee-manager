@@ -1,0 +1,207 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Twitter -->
+    <meta name="twitter:site" content="@themepixels">
+    <meta name="twitter:creator" content="@themepixels">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Amanda">
+    <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
+    <meta name="twitter:image" content="http://themepixels.me/amanda/img/amanda-social.png">
+
+    <!-- Facebook -->
+    <meta property="og:url" content="http://themepixels.me/amanda">
+    <meta property="og:title" content="Bracket">
+    <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
+
+    <meta property="og:image" content="http://themepixels.me/amanda/img/amanda-social.png">
+    <meta property="og:image:secure_url" content="http://themepixels.me/amanda/img/amanda-social.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+
+    <!-- Meta -->
+    <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
+    <meta name="author" content="ThemePixels">
+
+
+    <title>{% block title %}{% endblock title %}</title>
+
+
+
+    <!-- vendor css -->
+    <link href="{% static 'lib/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/Ionicons/css/ionicons.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/perfect-scrollbar/css/perfect-scrollbar.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/jquery-toggles/toggles-full.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/highlightjs/github.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/datatables/jquery.dataTables.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/select2/css/select2.min.css' %}" rel="stylesheet">
+ 
+     <!-- Amanda CSS -->
+     <link rel="stylesheet" href="{% static 'css/amanda.css' %}">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+  </head>
+
+  <body>
+   
+    <div class="am-header">
+      <div class="am-header-left">
+        <a id="naviconLeft" href="" class="am-navicon d-none d-lg-flex"><i class="icon ion-navicon-round"></i></a>
+        <a id="naviconLeftMobile" href="" class="am-navicon d-lg-none"><i class="icon ion-navicon-round"></i></a>
+        <a href="{% url 'home' %}" class="am-logo"><div style="background: white; padding-right: 10px;"><img src="{% static 'logo.png' %}" height="50"></div></a>
+      </div><!-- am-header-left -->
+
+      <div class="am-header-right">
+       
+        <div class="dropdown dropdown-profile">
+          <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+            <img src="../img/img3.jpg" class="wd-32 rounded-circle" alt="">
+            <span class="logged-name"><span class="hidden-xs-down">{{user.username}}</span> <i class="fa fa-angle-down mg-l-3"></i></span>
+          </a>
+          <div class="dropdown-menu wd-200">
+            <ul class="list-unstyled user-profile-nav">
+             
+              <li><a href="{% url 'logout' %}"><i class="icon ion-power"></i> Sign Out</a></li>
+            </ul>
+          </div><!-- dropdown-menu -->
+        </div><!-- dropdown -->
+      </div><!-- am-header-right -->
+    </div><!-- am-header -->
+
+
+    <div class="am-sideleft">
+      <div class="tab-content">
+        <div id="mainMenu" class="tab-pane active">
+          <ul class="nav am-sideleft-menu ml-2">
+            <li class="nav-item">
+              <a href="{% url 'home' %}" class="nav-link {% block active %}{% endblock active %}">
+                <i class="icon ion-ios-home-outline"></i>
+                <span>Dashboard</span>
+              </a>
+            </li><!-- nav-item -->
+            
+          
+            <li class="nav-item">
+              <a href="{% url 'create' %}" class="nav-link {% block active1 %}{% endblock active1 %}">
+                <i class="icon ion-person-add"></i>
+                <span>Add Employee</span>
+              </a>
+            </li><!-- nav-item -->
+    
+            <li class="nav-item">
+              <a href="" class="nav-link {% block active2 %}{% endblock active2 %}" data-toggle="modal" data-target="#modaldemo1">
+                <i class="icon ion-ios-people"></i>
+                <span>Import Employees</span>
+              </a>
+            </li><!-- nav-item -->
+    
+            <li class="nav-item">
+              <a href="{% url 'logout' %}" class="nav-link">
+                <i class="icon ion-log-out"></i>
+                <span>Logout</span>
+              </a>
+            </li><!-- nav-item -->
+          </ul>
+        </div><!-- #mainMenu -->
+
+      </div><!-- tab-content -->
+    </div><!-- am-sideleft -->
+    
+    
+    <div class="am-pagetitle">
+      <h5 class="am-title">{% block pagetitle %}{% endblock pagetitle %}</h5>
+      {% comment %} <form id="searchBar" class="search-bar" action="index.html">
+        <div class="form-control-wrapper">
+          <input type="search" class="form-control bd-0" placeholder="Search...">
+        </div><!-- form-control-wrapper -->
+        <button id="searchBtn" class="btn btn-orange"><i class="fa fa-search"></i></button>
+      </form><!-- search-bar --> {% endcomment %}
+    </div><!-- am-pagetitle -->
+    {% for message in messages %}
+    <div class="container-fluid p-0 am-pagetitle" style="text-align: center; width 500px; float: right;">
+      <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="True">&times;</span>
+        </button>
+        {{ message }}
+      </div>
+    </div>
+    {% endfor %}
+
+
+    {% block content %}{% endblock content %}
+
+
+    <div id="modaldemo1" class="modal fade">
+      <div class="modal-dialog modal-dialog-vertical-center" role="document">
+        <div class="modal-content bd-0 tx-14">
+          <div class="modal-header pd-y-20 pd-x-25">
+            <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Employee Data Import</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form enctype="multipart/form-data" method="POST" action="{% url 'import' %}">
+            {% csrf_token %}
+          <div class="modal-body pd-25">
+            <h6 class="lh-3 mg-b-20"><a href="{% static 'Book1.xlsx' %}" class="tx-inverse hover-primary" download>Download sample data</a></h6>
+            <img src="{% static 'sample.PNG' %}" style="width: 450px; margin-bottom: 60px;">
+            
+              <input type="file" name="file" accept=".xls, .xlsx">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-info pd-x-20">Import</button>
+            <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+        </div>
+      </div><!-- modal-dialog -->
+    </div><!-- modal -->
+
+<script src="{% static 'lib/jquery/jquery.js' %}"></script>
+<script src="{% static 'lib/popper.js/popper.js' %}"></script>
+<script src="{% static 'lib/bootstrap/bootstrap.js' %}"></script>
+<script src="{% static 'lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js' %}"></script>
+<script src="{% static 'lib/jquery-toggles/toggles.min.js' %}"></script>
+<script src="{% static 'lib/highlightjs/highlight.pack.js' %}"></script>
+<script src="{% static 'lib/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'lib/datatables-responsive/dataTables.responsive.js' %}"></script>
+<script src="{% static 'lib/select2/js/select2.min.js' %}"></script>
+
+
+<script src="{% static 'js/amanda.js' %}"></script>
+<script>
+  $(function(){
+    'use strict';
+
+    $('#datatable1').DataTable({
+      responsive: true,
+      language: {
+        searchPlaceholder: 'Search...',
+        sSearch: '',
+        lengthMenu: '_MENU_ items/page',
+      }
+    });
+
+    $('#datatable2').DataTable({
+      bLengthChange: false,
+      searching: false,
+      responsive: true
+    });
+
+    // Select2
+    $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
+
+  });
+</script>
+</body>
+</html>

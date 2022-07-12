@@ -1,0 +1,231 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock title %}
+{% block pagetitle %}Dashboard{% endblock pagetitle %}
+{% block active %}active{% endblock active %}
+{% block content %}
+
+
+<div class="am-mainpanel">
+  <div class="am-pagebody">
+
+
+    <div class="card pd-20 pd-sm-40">
+      <h6 class="card-body-title">Employee Records</h6>
+      <p class="mg-b-20 mg-sm-b-30"></p>
+
+      <div class="table-wrapper">
+        <table id="datatable1" class="table display responsive nowrap">
+          <thead>
+            <tr>
+              <th class="wd-25p">First name</th>
+              <th class="wd-15p">Last name</th>
+              <th class="wd-15p">Staff number</th>
+              <th class="wd-15p">Phone</th>
+              <th class="wd-10p">Employment type</th>
+              <th class="wd-25p">Branch</th>
+              <th class="wd-10p">Edit</th>
+              <th class="wd-10p">View</th>
+            </tr>
+          </thead>
+          <tbody>
+           
+          {% for employee in employees %}
+          
+          <tr>
+            <td>{{employee.other_names}}</td>
+            <td>{{employee.surname}}</td>
+            <td>{{employee.staff_number}}</td>
+            <td>{{employee.phone}}</td>
+            <td>{{employee.employment_type}}</td>
+            <td>{{employee.branch}}</td>
+            <td><a href="{% url 'update' employee.id %}" style="color: black;"><i class="icon ion-edit"></i></a></td>
+            <td><a href="" style="color: black;"  data-toggle="modal" data-target="#modaldemo{{employee.id}}"><i class="icon ion-eye"></i></a></td>
+          </tr>     
+
+          {% endfor %}
+
+          </tbody>
+        </table>
+      </div><!-- table-wrapper -->
+    </div><!-- card -->
+
+
+
+  </div><!-- am-pagebody -->
+  
+
+</div><!-- am-mainpanel -->
+
+
+{% for employee in employees %}
+
+<div id="modaldemo{{employee.id}}" class="modal fade">
+  <div class="modal-dialog modal-dialog-vertical-center " role="document">
+    <div class="modal-content bd-0 tx-14">
+      <div class="modal-header pd-y-20 pd-x-25">
+        <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Employee Details</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body pd-25">
+        
+    
+        
+        <img src="{{employee.passport_photo.url}}" class="img-thumbnail" alt="Passport Photo" width="100" height="100">
+      
+
+        <div class="row mt-4">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Full name:        </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.other_names}} {{employee.surname}}</h6></div>
+        </div>
+
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Employee ID:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.employee_id}}</h6></div>
+        </div>
+        
+        
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Staff number:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.staff_number}}</h6></div>
+        </div>
+
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Appointment start<br>date:</pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.appointment_start_date}}</h6></div>
+        </div>
+       
+       
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>TIN number:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.tin}}</h6></div>
+        </div>
+       
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>SSNIT number:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.ssnit}}</h6></div>
+        </div>
+        
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Date of birth:   </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.dob}}</h6></div>
+        </div>
+        
+        
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Title:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.title}}</h6></div>
+        </div>
+
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Gender:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.gender_code}}</h6></div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Marital status:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.marital_status}}</h6></div>
+        </div>
+
+
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Phone:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.phone}}</h6></div>
+        </div>
+
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Address:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.address}}</h6></div>
+        </div>
+        
+        
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Employment date: </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.employment_date}}</h6></div>
+        </div>
+        
+        
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Designation:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.designation}}</h6></div>
+        </div>
+        
+        
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Job grade:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.job_grade}}</h6></div>
+        </div>
+        
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Employment type: </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.employment_type}}</h6></div>
+        </div>
+        
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Branch:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.branch}}</h6></div>
+        </div>
+        
+        
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>HOD name:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.hod_name}}</h6></div>
+        </div>
+        
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Contract freuency<br>code:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.hod_name}}</h6></div>
+        </div>
+        
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Contract duration: </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.contract_duration}} months</h6></div>
+        </div>
+
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Created at:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.created_at}}</h6></div>
+        </div>
+
+
+        <div class="row mt-2">
+
+          <div class="col"><h6 class="lh-3 mg-b-20" style="color: #909090;"><pre>Updated at:     </pre></h6></div>
+          <div class="col"><h6 class="lh-3 mg-b-20">{{employee.updated_at}}</h6></div>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+{% endfor %}
+
+{% endblock content %}
+    
